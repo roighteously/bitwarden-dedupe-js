@@ -1,6 +1,7 @@
 const setButton = document.getElementById('btn')
 const startBtn = document.getElementById('btn2')
 const hyperlink = document.getElementById('hyperlink')
+const hyperlinkbtn = document.getElementById('db')
 const statmsg = document.getElementById('p')
 
 let sf = '';
