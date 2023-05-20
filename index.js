@@ -1,6 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const cfg = require('./config');
 const fs = require('fs');
+const path = require('path');
 
 function startBitDedupe() {
     const win = new BrowserWindow({
@@ -19,6 +20,8 @@ function startBitDedupe() {
 
     win.loadFile('gui/index.html')
 }
+
+app.on('ready', startBitDedupe);
 
 function bitDedupe(exported) {
     const checks = new Map();
