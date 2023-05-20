@@ -5,8 +5,8 @@ const path = require('path');
 
 function startBitDedupe() {
     const win = new BrowserWindow({
-        width: 1280,
-        height: 720,
+        width: 450,
+        height: 450,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -16,7 +16,7 @@ function startBitDedupe() {
 
     ipcMain.on('set-file', (event, f) => {
         file = f;
-        console.log('Set file to',f)
+        console.log('Set file to', f)
     })
 
     ipcMain.on('start', (event) => {
@@ -24,12 +24,12 @@ function startBitDedupe() {
     })
 
     ipcMain.on('open-file', (event, f) => {
-        dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
+        dialog.showOpenDialog({ properties: ['openFile'] }).then(function (response) {
             if (!response.canceled) {
                 // handle fully qualified file name
-              event.returnValue = response.filePaths[0];
+                event.returnValue = response.filePaths[0];
             } else {
-              console.log("no file selected");
+                event.returnValue = '';
             }
         });
     })

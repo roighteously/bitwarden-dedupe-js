@@ -3,6 +3,32 @@
     font-family: 'Rubik', sans-serif;
 }
 
+body {
+    background-color: rgb(173, 216, 230);
+}
+
+button {
+    border-radius: 8px;
+    border-color: rgba(0,0,0,0);
+
+    transition-duration: .5s;
+}
+
+button:hover {
+    border-style: double;
+    transform:scale(1.25);
+    rotate: 1deg;
+    border-color: rgba(0,0,0,0.1);
+    background-color: rgba(173, 216, 230, 0.4);
+}
+
+button:active {
+    border-style: dotted;
+    transform:scale(1.5);
+    background-color: rgba(173, 216, 230, 0.7);
+    color: white;
+}
+
 #hyperlink {
     display: none;
 }
