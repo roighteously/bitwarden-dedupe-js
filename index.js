@@ -20,7 +20,7 @@ function startBitDedupe() {
     })
 
     ipcMain.on('start', (event) => {
-        bitDedupe(file, ipcMain);
+        bitDedupe(file, event);
     })
 
     ipcMain.on('open-file', (event, f) => {
@@ -40,8 +40,6 @@ function startBitDedupe() {
 app.on('ready', startBitDedupe);
 
 function bitDedupe(exported, ev) {
-    console.log('Deduping..')
-    ev.emit('ev_msg', 'started')
     const checks = new Map();
     const itemList = []; // deduped items
     const parsed = JSON.parse(fs.readFileSync(exported));
@@ -84,5 +82,6 @@ function bitDedupe(exported, ev) {
 
     console.log(`${itemList.length}/${parsed.items.length - dupedItems} expected items deduped, ${dupedItems} dupes removed, ${parsed.items.length} items originally`)
     console.log('Found & removed', dupedItems, 'duped items in', exported + '.new.json')
+    ev.returnValue = `${itemList.length}/${parsed.items.length - dupedItems} expected items deduped, ${dupedItems} dupes removed, ${parsed.items.length} items originally (${exported + '.new.json'})`
     fs.writeFileSync(exported + '.new.json', JSON.stringify(bitwarden_template))
 }
