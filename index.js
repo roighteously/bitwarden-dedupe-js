@@ -39,7 +39,7 @@ parsed.items.forEach(item => {
 })
 
 const bitwarden_template = {
-    "encrypted": "false",
+    "encrypted": false,
     "folders": parsed.folders,
     "items": itemList
 }
