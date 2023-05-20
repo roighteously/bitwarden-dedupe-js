@@ -12,10 +12,14 @@ function startBitDedupe() {
         }
     })
 
-    ipcMain.on('set-title', (event, title) => {
+    ipcMain.on('set-file', (event, title) => {
         const webContents = event.sender
         const win = BrowserWindow.fromWebContents(webContents)
         win.setTitle(title)
+    })
+
+    ipcMain.on('start', () => {
+        console.log('start')
     })
 
     win.loadFile('gui/index.html')

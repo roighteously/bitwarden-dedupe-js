@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  setTitle: (title) => ipcRenderer.send('set-title', title)
+contextBridge.exposeInMainWorld('bd_api', {
+  setFile: (filepath) => ipcRenderer.send('set-file', filepath),
+  start: () => ipcRenderer.send('start')
 })
