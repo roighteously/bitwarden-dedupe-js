@@ -7,6 +7,6 @@ module.exports = {
     ],
     use: [
         'rm',
-        'warn' // Remove item and warn
+        // 'warn' // Remove item and warn
     ]
 }
