@@ -47,11 +47,8 @@ function bitDedupe(exported, ev) {
     let lastItem = {}; // init last item object for previous checking
     let dupedItems = 0;
 
-
-    // module loading
-    fs.readdirSync('./checks').forEach(item => {
-        const check = require('./checks/' + item);
-        checks.set(check.name, check);
+    checksList.forEach(item => {
+        checks.set(item.name, item);
     })
 
     parsed.items.forEach(item => {
@@ -85,3 +82,18 @@ function bitDedupe(exported, ev) {
     ev.returnValue = `${itemList.length}/${parsed.items.length - dupedItems} expected items deduped, ${dupedItems} dupes removed, ${parsed.items.length} items originally (${exported + '.new.json'})`
     fs.writeFileSync(exported + '.new.json', JSON.stringify(bitwarden_template))
 }
+
+const checksList = [
+    {
+        name: 'user_pass',
+        exec: (item, lastItem, cfg) => {
+            if(lastItem.name == item.name) {
+                // Website is potentially same, lets check user & pass
+                if (!lastItem.login.password === item.login.password) return; // lets check user
+                if (!lastItem.login.username === item.login.username) return; // its the sme
+                if (cfg.use.includes('warn')) console.log('[dupe found]', item.name, 'username:', lastItem.login.username);
+                return true;
+            };
+        }
+    }
+]
