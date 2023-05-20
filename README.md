@@ -12,7 +12,7 @@ Everything you need to know is included in the config file.
 
 ## Running
 
-Now run the program with `npm run start`. It's simple from there.
+Download the already packaged version from the Releases tab or run the program with `npm run start`. It's simple from there.
 
 ## Exporting
 
