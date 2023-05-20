@@ -12,6 +12,7 @@ parsed.items.forEach(item => {
         // Website is potentially same, lets check user & pass
         if(!lastItem.login.password == item.login.password) return; // lets check user
         if(!lastItem.login.username == item.login.username) return; // its the sme
+        console.log('---------')
         console.log('[dupe found]', item.name);
         console.log('username:', lastItem.login.username);
         console.log('---------')
