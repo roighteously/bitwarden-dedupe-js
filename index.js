@@ -3,25 +3,29 @@ const exported = './bitwarden_export_20230520064529.json';
 const cfg = require('./config');
 
 const fs = require('fs');
+
+const checks = new Map();
+const itemList = []; // deduped items
 const parsed = JSON.parse(fs.readFileSync(exported));
 
 let lastItem = {}; // init last item object for previous checking
-const itemList = []; // deduped items
+
 
 // module loading
 fs.readdirSync('./checks').forEach(item => {
-    console.log(item)
+    const check = require('./checks/'+item);
+    checks.set(check.name, check);
 })
 
 parsed.items.forEach(item => {
-    if(lastItem.name == item.name) {
-        // Website is potentially same, lets check user & pass
-        if(!lastItem.login.password == item.login.password) return; // lets check user
-        if(!lastItem.login.username == item.login.username) return; // its the sme
-        console.log('[dupe found]', item.name, 'username:', lastItem.login.username);
-        return;
-    }; // most simple, if it's the exact same dont
-    // console.log(item.name)
+    checks.forEach(check => {
+        if(cfg.check.includes(check.name)) {
+            const callback = check.exec(item, lastItem);
+
+            if(callback == true) return; // if duped item is found right here, exclude from item list
+        }
+    })
+
     lastItem = item;
     itemList.push(item);
 })
