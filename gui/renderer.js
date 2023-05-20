@@ -1,5 +1,7 @@
 const setButton = document.getElementById('btn')
 const titleInput = document.getElementById('title')
 setButton.addEventListener('click', () => {
-  window.bd_api.setFile(window.bd_api.openFileDialog());
+    let sf = window.bd_api.openFileDialog();
+    document.getElementById('p').innerText = "File picked: " + sf;
+    window.bd_api.setFile(sf);
 })
