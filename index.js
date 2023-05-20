@@ -12,14 +12,14 @@ function startBitDedupe() {
         }
     })
 
-    ipcMain.on('set-file', (event, title) => {
-        const webContents = event.sender
-        const win = BrowserWindow.fromWebContents(webContents)
-        win.setTitle(title)
+    let file = 'f';
+
+    ipcMain.on('set-file', (event, f) => {
+        file = f;
     })
 
     ipcMain.on('start', () => {
-        console.log('start')
+        bitDedupe(file);
     })
 
     win.loadFile('gui/index.html')
