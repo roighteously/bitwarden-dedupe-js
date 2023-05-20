@@ -29,3 +29,5 @@ parsed.items.forEach(item => {
     lastItem = item;
     itemList.push(item);
 })
+
+if(cfg.file == "new")
