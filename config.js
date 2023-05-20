@@ -5,5 +5,8 @@ module.exports = {
     check: [
         'user_pass'
     ],
-    use: 'rm'
+    use: [
+        'rm',
+        'warn' // Remove item and warn
+    ]
 }
