@@ -12,7 +12,7 @@ function startBitDedupe() {
         }
     })
 
-    let file = 'f';
+    let file = '';
 
     ipcMain.on('set-file', (event, f) => {
         file = f;
