@@ -26,7 +26,8 @@ parsed.items.forEach(item => {
 
             if (callback == true) {
                 dupedItems++;
-                duped = true
+                duped = true;
+                lastItem = {};
             }; // if duped item is found right here, exclude from item list
         }
     })
