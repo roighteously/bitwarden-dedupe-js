@@ -19,8 +19,8 @@ function startBitDedupe() {
         console.log('Set file to',f)
     })
 
-    ipcMain.on('start', () => {
-        bitDedupe(file);
+    ipcMain.on('start', (event) => {
+        bitDedupe(file, ipcMain);
     })
 
     ipcMain.on('file-read', (event, f) => {
@@ -39,7 +39,9 @@ function startBitDedupe() {
 
 app.on('ready', startBitDedupe);
 
-function bitDedupe(exported) {
+function bitDedupe(exported, ev) {
+    console.log('Deduping..')
+    ev.emit('ev_msg', 'started')
     const checks = new Map();
     const itemList = []; // deduped items
     const parsed = JSON.parse(fs.readFileSync(exported));
