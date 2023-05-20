@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const cfg = require('./config');
 const fs = require('fs');
 const path = require('path');
@@ -20,6 +20,17 @@ function startBitDedupe() {
 
     ipcMain.on('start', () => {
         bitDedupe(file);
+    })
+
+    ipcMain.on('file-read', (event, f) => {
+        dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
+            if (!response.canceled) {
+                // handle fully qualified file name
+              event.reply(response.filePaths[0])
+            } else {
+              console.log("no file selected");
+            }
+        });
     })
 
     win.loadFile('gui/index.html')
