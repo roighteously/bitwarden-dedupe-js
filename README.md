@@ -1,5 +1,7 @@
 # bitwarden-dedupe-js
 
+but with a gui
+
 Deduplicates JSON Bitwarden exports.  
 **Make sure your exported file is not encrypted.**
 
