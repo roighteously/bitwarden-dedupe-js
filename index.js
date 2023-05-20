@@ -23,7 +23,7 @@ function startBitDedupe() {
         bitDedupe(file, ipcMain);
     })
 
-    ipcMain.on('file-read', (event, f) => {
+    ipcMain.on('open-file', (event, f) => {
         dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
             if (!response.canceled) {
                 // handle fully qualified file name
