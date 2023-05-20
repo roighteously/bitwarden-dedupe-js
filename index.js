@@ -26,7 +26,7 @@ function startBitDedupe() {
         dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
             if (!response.canceled) {
                 // handle fully qualified file name
-              event.reply(response.filePaths[0])
+              event.returnValue = response.filePaths[0];
             } else {
               console.log("no file selected");
             }
