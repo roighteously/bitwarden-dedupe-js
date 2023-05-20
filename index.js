@@ -6,8 +6,18 @@ function startBitDedupe() {
     const win = new BrowserWindow({
         width: 1280,
         height: 720,
-        
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        }
     })
+
+    ipcMain.on('set-title', (event, title) => {
+        const webContents = event.sender
+        const win = BrowserWindow.fromWebContents(webContents)
+        win.setTitle(title)
+    })
+
+    win.loadFile('gui/index.html')
 }
 
 function bitDedupe(exported) {
