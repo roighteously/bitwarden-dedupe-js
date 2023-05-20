@@ -16,6 +16,7 @@ function startBitDedupe() {
 
     ipcMain.on('set-file', (event, f) => {
         file = f;
+        console.log('Set file to',f)
     })
 
     ipcMain.on('start', () => {
